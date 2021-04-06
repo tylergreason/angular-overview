@@ -1,5 +1,6 @@
 # Resources
 - [Angular site](https://angular.io/)
+- [Angular Overview](https://angular.io/guide/architecture)
 - [Deborah Kurata on Pluralsight](https://app.pluralsight.com/library/courses/angular-2-getting-started-update/table-of-contents) - excellent, albeit possibly android, instructor. Covers all major topics and shows you how to utilize what she teaches. 
 ## VS Code Extensions: 
 - [Angular snippets](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2)
@@ -95,7 +96,6 @@ ___
 
 # [RXJS](https://rxjs-dev.firebaseapp.com/guide/overview)
 - RXJS is a JavaScript library for creating observable data. 
-- RXJS is not very intuitive at first, so don't worry about understanding it immediately. 
 - RXJS lets data be observed by any number of entities, and the observed data will tell those entities when changes occur. 
   - Example: our `httpService` fires a method that fetches data from a server. That method returns an `observable`, which is then subscribed to by the component that called it. That component will then know when data from that fetch returns, or if there is an error, or when there is no more data to be returned (common with http requests). 
 - Observables can also be an open stream of data instead of finishing after the first return. 
@@ -115,9 +115,15 @@ ___
 
 # Routing 
 - [Routing](https://angular.io/guide/router) is built into Angular. 
-- Feature modules, meaning modules with views, are routed to. 
-  - Example: the home page module has its own route. This module has its own component, and it imports other components to display such as lists of items or a home page notification area. 
-- Routes are listed in the `app-routing.module`.
+- There are two types of routing in Angular: 
+  - [Lazy loading](https://angular.io/guide/lazy-loading-ngmodules) (suggested): 
+    - Loads routes when they're navigated to, not all at once.
+    - Feature modules, meaning modules with views, are routed to. 
+      - Example: the home page module has its own route. This module has its own component, and it imports other components to display such as lists of items or a home page notification area. 
+  - Standard routing: 
+    - Loads all components when the app starts (inefficient). 
+    - Can route to components, not just modules. 
+- Routes are listed in `app-routing.module.ts`.
 - Routes can be [lazy-loaded](https://angular.io/guide/lazy-loading-ngmodules) to improve performance. 
 
 
