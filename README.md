@@ -1,3 +1,20 @@
+- [Resources](#resources)
+  - [VS Code Extensions:](#vs-code-extensions)
+- [Components](#components)
+- [Templates](#templates)
+    - [Expressions in templates](#expressions-in-templates)
+    - [Structural Directives](#structural-directives)
+    - [Data Binding](#data-binding)
+- [Modules](#modules)
+    - [Metadata](#metadata)
+    - [Feature Modules](#feature-modules)
+- [Services](#services)
+- [RXJS](#rxjs)
+    - [Operators](#operators)
+- [Pipes](#pipes)
+- [Routing](#routing)
+- [Forms](#forms)
+
 # Resources
 - [Angular site](https://angular.io/)
 - [Angular Overview](https://angular.io/guide/architecture)
@@ -29,16 +46,14 @@ ___
       
       // declaration of class, which implements lifecycle hooks
       export class TicketsComponent implements OnInit, OnDestroy {
-        constructor(){
-
-        }
+        constructor(){}
 
         ngOnInit() {
-
+          // Runs when the component is first rendered. Use this instead of the constructor method!
         }
 
         ngOnDestroy() {
-
+          // Runs when component leaves the page. Use this for unsubscribing from subscriptions, and more! 
         }
       }
   ```
@@ -79,9 +94,45 @@ ___
 # [Modules](https://angular.io/guide/architecture-modules)
 - Collections of components, directives, and pipes that are shared amongst the app. 
 - All apps have the `App.module.ts` module, the base module for any Angular application. 
-- [Metadata](https://angular.io/guide/architecture-modules), including importing and exporting modules. 
 - [Common Module](https://angular.io/api/common/CommonModule#description) - used to import basic Angular features such as `ngOnInit`. 
 - You can use a [Shared Module](https://angular.io/guide/sharing-ngmodules) to easily import and export large amounts of commonly used components/etc.
+### [Metadata](https://angular.io/guide/architecture-modules)
+- A module's metadata describes the imports and declarations of the module. 
+- Basically, what the module collects (including components for feature modules) and what data it gives access to.
+- Metadata has 5 properties (text from [here](https://angular.io/guide/cheatsheet)): 
+  - declarations: List of components, directives, and pipes that belong to this module.
+  - imports: List of modules to import into this module. Everything from the imported modules is available to declarations of this module.
+  - exports: List of components, directives, and pipes visible to modules that import this module.
+  - providers: List of dependency injection providers visible both to the contents of this module and to importers of this module.
+  - bootstrap: List of components to bootstrap when this module is bootstrapped. *Only the root NgModule should set the bootstrap property.*
+    - Example: a home page module: 
+       ```ts 
+      import { NgModule } from '@angular/core';
+      import { CommonModule, DatePipe } from '@angular/common';
+      import { HomeComponent } from './home.component';
+      import { HomeRoutingModule } from './home-routing.module';
+      import { SharedModule } from '../../shared/shared.module';
+      import { FlexModule } from '@angular/flex-layout';
+
+      @NgModule({
+        declarations: [ // Declare which components this module will use if it's a feature module.
+          HomeComponent
+        ],
+        imports: [ // Which modules the declarations of this module should have access to.
+          CommonModule, // Import common module so that HomeComponent can use NgOnInit() & more.
+          HomeRoutingModule, // This app uses lazy loading, so this feature module's RoutingModule must be imported here.
+          SharedModule, // The module that imports data most modules will use, SharedModule, is imported here for HomeComponent to have access to that data. 
+          FlexModule // HomeComponent needs to use FlexModule, so it's imported here.
+        ],
+        providers: [
+          DatePipe // Import pipes that components declared by this module, and importers of this module, will use. 
+        ],
+        exports: []
+      })
+      export class HomeModule { }
+      ```
+
+### Feature Modules
 - [Feature Modules](https://angular.io/guide/feature-modules) are modules that contain a view, like a component. They are best thought of as major components to your application, components that can directly import what they need, and can be routed to. Use a feature module when you need a major building block of your app that you know will import components to render, but will be able to render data itself as well. 
   - Example: Any page of a website would be considered a feature module, but not the components that make up that page. The home page of Reddit is a feature module, but the posts listed on the home page are each instances of a component that are fed data to display. 
 - Usually you do not use modules to import services because it creates a new instance of that service. Just import the service itself. 
