@@ -18,6 +18,8 @@
 - [Pipes](#pipes)
 - [Routing](#routing)
 - [Forms](#forms)
+  - [Template Driven Forms](#template-driven-forms)
+  - [Reactive Forms](#reactive-forms)
 
 # Resources
 - [Angular site](https://angular.io/)
@@ -188,4 +190,23 @@ ___
 - Routes can be [lazy-loaded](https://angular.io/guide/lazy-loading-ngmodules) to improve performance. 
 
 
-# Forms 
+# [Forms](https://angular.io/guide/forms-overview)
+- Angular provides a 
+  ## Template Driven Forms
+  - The more basic of the two. 
+  - Good for simple forms, but don't scale well to more complex forms. 
+  - Validation is also only in the template.
+  ## Reactive Forms
+  - More full-featured than template driven forms. 
+  - Validations are accessible in the component. 
+  - Form is defined in the component, then linked to the component from the template as a directive. 
+    - Example: 
+     ```ts
+     export class MyComponent {
+       myNewForm = new FormControl(''); // Define the form 
+     }
+     ```
+     In `MyComponent`'s template: 
+     ```html
+     <input type="text" [formControl]="myNewForm"></input>
+     ```
