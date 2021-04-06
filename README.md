@@ -97,10 +97,16 @@ ___
 # [RXJS](https://rxjs-dev.firebaseapp.com/guide/overview)
 - RXJS is a JavaScript library for creating observable data. 
 - RXJS lets data be observed by any number of entities, and the observed data will tell those entities when changes occur. 
-  - Example: our `httpService` fires a method that fetches data from a server. That method returns an `observable`, which is then subscribed to by the component that called it. That component will then know when data from that fetch returns, or if there is an error, or when there is no more data to be returned (common with http requests). 
+- Observables broadcast three statuses: `next`, `completed`, and `error`. `next` tells each subscribed entity what the next piece of data is, `complete` tells the subscribed entities that there is no more data and they are automatically unsubscribed, and `error` tells the subscribed entities there was an error. 
+- When an entity no longer needs to subscribe to an observable, it must be manually unsubscribed (with few exceptions where it will be automatically unsubscribed). A component's `NgOnDestroy()` lifecycle hook is helpful for unsubscribing from subscriptions, because we know if the component is going to be destroyed it no longer needs to be subscribed. Lingering subscriptions can cause data leaks or worse, so always remember to unsubscribe! 
+  - Observable example: our `httpService` fires a method that fetches data from a server. That method returns an `observable`, which is then subscribed to by the component that called it. That component will then know when data from that fetch returns, or if there is an error, or when there is no more data to be returned (common with http requests). 
 - Observables can also be an open stream of data instead of finishing after the first return. 
   - Example: a `cartService` tracks the number of items in the user's cart. Numerous components have access to this service for ease of modifying the cart. One of `cartService`'s methods is `cartCount()`, which returns an observable of how many items are in the user's cart. Another method of `cartService` is `updateCartCount(quantity: number)`, which takes a numerical value and updates the service's `cartCount` observable. Now, each component that is subscribed to that observable will know what the new cart quantity is, instead of the `cartService` needing to tell those components itself. 
 - Many aspects of Angular are able to be subscribed to, such as when a page has loaded, if a page is going to be navigated from, or the route parameters of a URL. 
+### [Operators](https://rxjs-dev.firebaseapp.com/guide/operators)
+- RXJS has functions called operators.
+- Operators either create streams of data (Creation Operators) or modify streams of data (Pipeable Operators).
+- Pipeable operators modify data before allowing access to it by subscribers. Pipeable operators can be piped together to run one after the other (think *chained* together). 
 
 # [Pipes](https://angular.io/guide/pipes) 
 - Helpful functions for transforming data in template expressions. 
