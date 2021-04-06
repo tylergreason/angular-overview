@@ -20,6 +20,9 @@
 - [Forms](#forms)
   - [Template Driven Forms](#template-driven-forms)
   - [Reactive Forms](#reactive-forms)
+  - [Form Validation](#form-validation)
+    - [Validation for Template Driven Forms](#validation-for-template-driven-forms)
+    - [Custom Validation for Reactive Forms](#custom-validation-for-reactive-forms)
 
 # Resources
 - [Angular site](https://angular.io/)
@@ -210,3 +213,6 @@ ___
      ```html
      <input type="text" [formControl]="myNewForm"></input>
      ```
+  ## [Form Validation](https://angular.io/guide/form-validation)
+  ### [Validation for Template Driven Forms](https://angular.io/guide/form-validation#validating-input-in-template-driven-forms)
+  ### [Custom Validation for Reactive Forms](https://angular.io/guide/form-validation#defining-custom-validators)
