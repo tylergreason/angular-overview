@@ -46,31 +46,30 @@ ___
 # Templates 
 - Templates are the markup of a component.
 - Templates use [template syntax](https://angular.io/guide/template-syntax), which is similar to standard HTML but allows the use of Angular expressions and logic. 
-#### [Expressions in templates](https://angular.io/guide/interpolation)
+### [Expressions in templates](https://angular.io/guide/interpolation)
   - Include TypeScript expressions in your template by wrapping it in `{{double curly braces}}`. This works only for expressions and strings, not for conditional logic (see below).
-#### [Structural Directives](https://angular.io/guide/structural-directives)
+### [Structural Directives](https://angular.io/guide/structural-directives)
   - Structural directives are how we use conditional logic in our template. 
   - Includes `*ngFor, *ngIf, and *ngSwitch`.
-  - `*ngIf`
+  - [*ngIf](https://angular.io/api/common/NgIf)
     - `<div *ngIf="1 === 1">This element will render while the condition is true</div>`
-  - `*ngFor`
-    - `<div *ngFor="let apple of apples">This will render a div element for each element in the component's 'apples' property. We can access </div>`.
-  - [`*ngSwitch`](https://angular.io/api/common/NgSwitch)
-#### [Data Binding](https://angular.io/guide/binding-syntax)
+  - [*ngFor](https://angular.io/api/common/NgForOf)
+    - `<div *ngFor="let apple of apples">This will render a div element for each element in the component's 'apples' array property. We can display data from the current element using double curly braces like so: {{apple}}, or {{apple.type}}.</div>`.
+  - [*ngSwitch](https://angular.io/api/common/NgSwitch)
+### [Data Binding](https://angular.io/guide/binding-syntax)
   - Multiple uses, including using component data as element attribute values, sharing data between two components, and binding events to elements.
-  - `<button [disabled]="thisBooleanValueInMyComponent">This will be disabled based on what thisBooleanValueInMyComponent evaluates to</div>`
-- ##### [Event Binding](https://angular.io/guide/event-binding)
+  - `<button [disabled]="thisBooleanValueInMyComponent">This will be disabled based on what thisBooleanValueInMyComponent evaluates to</button>`
+- #### [Event Binding](https://angular.io/guide/event-binding)
   - Commonly used for click events, or submit events. 
   - `<button (click)="executeThisMethod($event, otherArgument)">Click me</button>`
   - The button above will fire the `executeThisMethod()` method. An event's `event` value can be passed with `$event`. `$event` can be called anything in your component (`$event`, `event`, or `e` are standard), but must be referred to as `$event` in the template. 
-- ##### [Two-Way Binding](https://angular.io/guide/two-way-binding)
+- #### [Two-Way Binding](https://angular.io/guide/two-way-binding)
   - Useful for sharing data between components. 
   - One component can modify another component's data. 
   - Think of a component that changes another component's background color. 
   - If more than one component needs to interact with another component's data, consider using a Service instead.
 - [Inputs and Outputs](https://angular.io/guide/inputs-outputs)
-
-
+  
 - [Cheat Sheet](https://angular.io/guide/binding-syntax#binding-types-and-targets)
   - Use [] to bind from source to view.
   - Use () to bind from view to source.
