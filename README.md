@@ -11,7 +11,7 @@
     - [Cheat Sheet](#cheat-sheet)
 - [Modules](#modules)
   - [Metadata](#metadata)
-  - [Feature Modules)](#feature-modules)
+  - [Feature Modules](#feature-modules)
 - [Services](#services)
 - [RXJS](#rxjs)
   - [Operators](#operators)
@@ -141,7 +141,7 @@ ___
       export class HomeModule { }
       ```
 
-## [Feature Modules]((https://angular.io/guide/feature-modules))
+## [Feature Modules](https://angular.io/guide/feature-modules)
 - Feature Modules are modules that contain a view, like a component. They are best thought of as major components to your application, components that can directly import what they need, and can be routed to. Use a feature module when you need a major building block of your app that you know will import components to render, but will be able to render data itself as well. 
   - Example: Any page of a website would be considered a feature module, but not the components that make up that page. The home page of Reddit is a feature module, but the posts listed on the home page are each instances of a component that are fed data to display. 
 - Usually you do not use modules to import services because it creates a new instance of that service. Just import the service itself. 
